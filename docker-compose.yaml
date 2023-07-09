@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  quarkus:
+    build:
+      context: server/de.privat.grpc.test
+      dockerfile: src/main/docker/Dockerfile.jvm
+    ports:
+      - 8080:8080
+
+  envoy:
+    image: envoyproxy/envoy:v1.17.0
+    volumes:
+      - ./config/envoy.yaml:/etc/envoy/envoy.yaml
+    ports:
+      - 9090:9090
+      - 9191:9191
+
